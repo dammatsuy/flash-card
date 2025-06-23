@@ -120,47 +120,47 @@ export default function FlashCardApp() {
   if (!gameStarted) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-3">
-        <div className="text-center bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full">
-          <h1 className="text-2xl font-bold text-gray-800 mb-3">
+        <div className="text-center bg-white rounded-2xl shadow-xl p-8 max-w-sm w-full mx-auto">
+          <h1 className="text-2xl font-bold text-gray-800 mb-4">
             🎯 フラッシュカード 🎯
           </h1>
           <p className="text-base text-gray-600 mb-6">
             どのカテゴリーで遊びますか？
           </p>
           
-          <div className="grid grid-cols-2 gap-3 mb-4">
+          <div className="grid grid-cols-2 gap-4 mb-6">
             <button
               onClick={() => handleCategorySelect('food')}
-              className="flex flex-col items-center bg-orange-50 hover:bg-orange-100 p-4 rounded-xl border-2 border-orange-200 transition-all transform hover:scale-105"
+              className="flex flex-col items-center bg-orange-50 hover:bg-orange-100 p-5 rounded-xl border-2 border-orange-200 transition-all transform hover:scale-105"
             >
-              <span className="text-2xl mb-1">🍎</span>
+              <span className="text-3xl mb-2">🍎</span>
               <span className="text-sm font-medium text-orange-800">たべもの</span>
               <span className="text-xs text-orange-600">8枚</span>
             </button>
             
             <button
               onClick={() => handleCategorySelect('animal')}
-              className="flex flex-col items-center bg-green-50 hover:bg-green-100 p-4 rounded-xl border-2 border-green-200 transition-all transform hover:scale-105"
+              className="flex flex-col items-center bg-green-50 hover:bg-green-100 p-5 rounded-xl border-2 border-green-200 transition-all transform hover:scale-105"
             >
-              <span className="text-2xl mb-1">🐶</span>
+              <span className="text-3xl mb-2">🐶</span>
               <span className="text-sm font-medium text-green-800">どうぶつ</span>
               <span className="text-xs text-green-600">8枚</span>
             </button>
             
             <button
               onClick={() => handleCategorySelect('vehicle')}
-              className="flex flex-col items-center bg-blue-50 hover:bg-blue-100 p-4 rounded-xl border-2 border-blue-200 transition-all transform hover:scale-105"
+              className="flex flex-col items-center bg-blue-50 hover:bg-blue-100 p-5 rounded-xl border-2 border-blue-200 transition-all transform hover:scale-105"
             >
-              <span className="text-2xl mb-1">🚗</span>
+              <span className="text-3xl mb-2">🚗</span>
               <span className="text-sm font-medium text-blue-800">のりもの</span>
               <span className="text-xs text-blue-600">8枚</span>
             </button>
             
             <button
               onClick={() => handleCategorySelect('all')}
-              className="flex flex-col items-center bg-purple-50 hover:bg-purple-100 p-4 rounded-xl border-2 border-purple-200 transition-all transform hover:scale-105"
+              className="flex flex-col items-center bg-purple-50 hover:bg-purple-100 p-5 rounded-xl border-2 border-purple-200 transition-all transform hover:scale-105"
             >
-              <span className="text-2xl mb-1">🎯</span>
+              <span className="text-3xl mb-2">🎯</span>
               <span className="text-sm font-medium text-purple-800">すべて</span>
               <span className="text-xs text-purple-600">24枚</span>
             </button>
@@ -171,7 +171,7 @@ export default function FlashCardApp() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex flex-col justify-center p-3">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-3 pt-8">
       <div className="w-full max-w-sm mx-auto">
         {/* ヘッダー */}
         <div className="text-center mb-4">
@@ -198,20 +198,21 @@ export default function FlashCardApp() {
             <div className="text-6xl mb-4 p-4 bg-gray-50 rounded-2xl inline-block">{currentCard.emoji}</div>
             <p className="text-xl font-bold text-gray-800 mb-4">これはなあに？</p>
             
-            {showAnswer && (
-              <div className="text-2xl font-bold text-purple-700 mb-4 bg-purple-50 p-4 rounded-xl">
-                {currentCard.name}
-              </div>
-            )}
-            
-            {!showAnswer && (
-              <button
-                onClick={handleShowAnswer}
-                className="bg-gradient-to-r from-green-500 to-blue-500 text-white px-6 py-3 rounded-full text-base font-bold hover:from-green-600 hover:to-blue-600 transition-all shadow-lg transform hover:scale-105 mb-4"
-              >
-                こたえをみる
-              </button>
-            )}
+            {/* 答え表示エリア - 固定の高さを確保 */}
+            <div className="min-h-[80px] flex items-center justify-center mb-4">
+              {showAnswer ? (
+                <div className="text-2xl font-bold text-purple-700 bg-purple-50 p-4 rounded-xl">
+                  {currentCard.name}
+                </div>
+              ) : (
+                <button
+                  onClick={handleShowAnswer}
+                  className="bg-gradient-to-r from-green-500 to-blue-500 text-white px-6 py-3 rounded-full text-base font-bold hover:from-green-600 hover:to-blue-600 transition-all shadow-lg transform hover:scale-105"
+                >
+                  こたえをみる
+                </button>
+              )}
+            </div>
           </div>
         </div>
 
