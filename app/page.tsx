@@ -119,7 +119,7 @@ export default function FlashCardApp() {
 
   if (!gameStarted) {
     return (
-      <div className="bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-3">
+      <div className="flex items-center justify-center p-3">
         <div className="text-center bg-white rounded-2xl shadow-xl p-8 max-w-sm w-full mx-auto">
           <h1 className="text-2xl font-bold text-gray-800 mb-4">
             🎯 フラッシュカード 🎯
@@ -171,7 +171,7 @@ export default function FlashCardApp() {
   }
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-3 pt-8">
+    <div className="p-3 pt-8">
       <div className="w-full max-w-sm mx-auto">
         {/* ヘッダー */}
         <div className="text-center mb-4">
