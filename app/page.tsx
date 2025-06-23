@@ -119,50 +119,50 @@ export default function FlashCardApp() {
 
   if (!gameStarted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4">
-        <div className="text-center bg-white rounded-3xl shadow-xl p-12 max-w-lg">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-3">
+        <div className="text-center bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full">
+          <h1 className="text-2xl font-bold text-gray-800 mb-3">
             🎯 フラッシュカード 🎯
           </h1>
-          <p className="text-xl text-gray-600 mb-8">
+          <p className="text-base text-gray-600 mb-6">
             どのカテゴリーで遊びますか？
           </p>
           
-          <div className="grid grid-cols-2 gap-4 mb-4">
+          <div className="grid grid-cols-2 gap-3 mb-4">
             <button
               onClick={() => handleCategorySelect('food')}
-              className="flex flex-col items-center bg-orange-50 hover:bg-orange-100 p-6 rounded-2xl border-2 border-orange-200 transition-all transform hover:scale-105"
+              className="flex flex-col items-center bg-orange-50 hover:bg-orange-100 p-4 rounded-xl border-2 border-orange-200 transition-all transform hover:scale-105"
             >
-              <span className="text-4xl mb-2">🍎</span>
-              <span className="text-lg font-medium text-orange-800">たべもの</span>
-              <span className="text-sm text-orange-600">8枚</span>
+              <span className="text-2xl mb-1">🍎</span>
+              <span className="text-sm font-medium text-orange-800">たべもの</span>
+              <span className="text-xs text-orange-600">8枚</span>
             </button>
             
             <button
               onClick={() => handleCategorySelect('animal')}
-              className="flex flex-col items-center bg-green-50 hover:bg-green-100 p-6 rounded-2xl border-2 border-green-200 transition-all transform hover:scale-105"
+              className="flex flex-col items-center bg-green-50 hover:bg-green-100 p-4 rounded-xl border-2 border-green-200 transition-all transform hover:scale-105"
             >
-              <span className="text-4xl mb-2">🐶</span>
-              <span className="text-lg font-medium text-green-800">どうぶつ</span>
-              <span className="text-sm text-green-600">8枚</span>
+              <span className="text-2xl mb-1">🐶</span>
+              <span className="text-sm font-medium text-green-800">どうぶつ</span>
+              <span className="text-xs text-green-600">8枚</span>
             </button>
             
             <button
               onClick={() => handleCategorySelect('vehicle')}
-              className="flex flex-col items-center bg-blue-50 hover:bg-blue-100 p-6 rounded-2xl border-2 border-blue-200 transition-all transform hover:scale-105"
+              className="flex flex-col items-center bg-blue-50 hover:bg-blue-100 p-4 rounded-xl border-2 border-blue-200 transition-all transform hover:scale-105"
             >
-              <span className="text-4xl mb-2">🚗</span>
-              <span className="text-lg font-medium text-blue-800">のりもの</span>
-              <span className="text-sm text-blue-600">8枚</span>
+              <span className="text-2xl mb-1">🚗</span>
+              <span className="text-sm font-medium text-blue-800">のりもの</span>
+              <span className="text-xs text-blue-600">8枚</span>
             </button>
             
             <button
               onClick={() => handleCategorySelect('all')}
-              className="flex flex-col items-center bg-purple-50 hover:bg-purple-100 p-6 rounded-2xl border-2 border-purple-200 transition-all transform hover:scale-105"
+              className="flex flex-col items-center bg-purple-50 hover:bg-purple-100 p-4 rounded-xl border-2 border-purple-200 transition-all transform hover:scale-105"
             >
-              <span className="text-4xl mb-2">🎯</span>
-              <span className="text-lg font-medium text-purple-800">すべて</span>
-              <span className="text-sm text-purple-600">24枚</span>
+              <span className="text-2xl mb-1">🎯</span>
+              <span className="text-sm font-medium text-purple-800">すべて</span>
+              <span className="text-xs text-purple-600">24枚</span>
             </button>
           </div>
         </div>
@@ -171,35 +171,35 @@ export default function FlashCardApp() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-2xl">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex flex-col justify-center p-3">
+      <div className="w-full max-w-sm mx-auto">
         {/* ヘッダー */}
-        <div className="text-center mb-6">
-          <div className="flex justify-between items-center mb-4 bg-white rounded-2xl p-4 shadow-lg">
+        <div className="text-center mb-4">
+          <div className="flex justify-between items-center mb-3 bg-white rounded-xl p-3 shadow-lg">
             <button
               onClick={handleBackToHome}
-              className="text-gray-600 hover:text-gray-800 px-3 py-2 rounded-lg hover:bg-gray-100 transition-all"
+              className="text-gray-600 hover:text-gray-800 px-2 py-1 rounded-lg hover:bg-gray-100 transition-all text-sm"
             >
               ← ホーム
             </button>
-            <div className="text-lg font-semibold text-gray-700">
+            <div className="text-sm font-semibold text-gray-700">
               {currentCardIndex + 1} / {filteredCards.length}
             </div>
-            <div className="w-16"></div> {/* スペーサー */}
+            <div className="w-12"></div> {/* スペーサー */}
           </div>
-          <div className={`inline-block px-6 py-3 rounded-full text-sm font-semibold border-2 ${getCategoryColor(currentCard.category)}`}>
+          <div className={`inline-block px-4 py-2 rounded-full text-xs font-semibold border-2 ${getCategoryColor(currentCard.category)}`}>
             {getCategoryEmoji(selectedCategory)} {getCategoryName(selectedCategory)}
           </div>
         </div>
 
         {/* カード */}
-        <div className="bg-white rounded-3xl shadow-2xl p-8 mb-6 border border-gray-100">
-          <div className="text-center mb-8">
-            <div className="text-9xl mb-6 p-6 bg-gray-50 rounded-3xl inline-block">{currentCard.emoji}</div>
-            <p className="text-3xl font-bold text-gray-800 mb-6">これはなあに？</p>
+        <div className="bg-white rounded-2xl shadow-2xl p-6 mb-4 border border-gray-100">
+          <div className="text-center">
+            <div className="text-6xl mb-4 p-4 bg-gray-50 rounded-2xl inline-block">{currentCard.emoji}</div>
+            <p className="text-xl font-bold text-gray-800 mb-4">これはなあに？</p>
             
             {showAnswer && (
-              <div className="text-4xl font-bold text-purple-700 mb-8 bg-purple-50 p-6 rounded-2xl">
+              <div className="text-2xl font-bold text-purple-700 mb-4 bg-purple-50 p-4 rounded-xl">
                 {currentCard.name}
               </div>
             )}
@@ -207,7 +207,7 @@ export default function FlashCardApp() {
             {!showAnswer && (
               <button
                 onClick={handleShowAnswer}
-                className="bg-gradient-to-r from-green-500 to-blue-500 text-white px-8 py-4 rounded-full text-xl font-bold hover:from-green-600 hover:to-blue-600 transition-all shadow-lg transform hover:scale-105 mb-8"
+                className="bg-gradient-to-r from-green-500 to-blue-500 text-white px-6 py-3 rounded-full text-base font-bold hover:from-green-600 hover:to-blue-600 transition-all shadow-lg transform hover:scale-105 mb-4"
               >
                 こたえをみる
               </button>
@@ -216,11 +216,11 @@ export default function FlashCardApp() {
         </div>
 
         {/* ナビゲーション */}
-        <div className="flex justify-between items-center bg-white rounded-3xl p-6 shadow-xl">
+        <div className="flex justify-between items-center bg-white rounded-2xl p-4 shadow-xl">
           <button
             onClick={handlePreviousCard}
             disabled={currentCardIndex === 0}
-            className={`flex items-center px-6 py-3 rounded-full text-lg font-bold transition-all transform hover:scale-105 ${
+            className={`flex items-center px-4 py-2 rounded-full text-sm font-bold transition-all transform hover:scale-105 ${
               currentCardIndex === 0
                 ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
                 : 'bg-gradient-to-r from-gray-500 to-gray-600 text-white hover:from-gray-600 hover:to-gray-700 shadow-lg'
@@ -229,18 +229,18 @@ export default function FlashCardApp() {
             ← まえ
           </button>
           
-          <div className="text-center px-4">
-            <div className="flex space-x-2">
-              {Array.from({ length: Math.min(filteredCards.length, 10) }, (_, i) => (
+          <div className="text-center px-3">
+            <div className="flex space-x-1">
+              {Array.from({ length: Math.min(filteredCards.length, 8) }, (_, i) => (
                 <div
                   key={i}
-                  className={`w-2 h-2 rounded-full ${
-                    i === currentCardIndex % 10 ? 'bg-purple-500' : 'bg-gray-300'
+                  className={`w-1.5 h-1.5 rounded-full ${
+                    i === currentCardIndex % 8 ? 'bg-purple-500' : 'bg-gray-300'
                   }`}
                 />
               ))}
-              {filteredCards.length > 10 && (
-                <span className="text-gray-500 text-sm ml-2">...</span>
+              {filteredCards.length > 8 && (
+                <span className="text-gray-500 text-xs ml-1">...</span>
               )}
             </div>
           </div>
@@ -248,7 +248,7 @@ export default function FlashCardApp() {
           <button
             onClick={handleNextCard}
             disabled={currentCardIndex === filteredCards.length - 1}
-            className={`flex items-center px-6 py-3 rounded-full text-lg font-bold transition-all transform hover:scale-105 ${
+            className={`flex items-center px-4 py-2 rounded-full text-sm font-bold transition-all transform hover:scale-105 ${
               currentCardIndex === filteredCards.length - 1
                 ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
                 : 'bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600 shadow-lg'
