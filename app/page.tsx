@@ -159,7 +159,7 @@ export default function FlashCardApp() {
             >
               <span className="text-3xl mb-2">🍎</span>
               <span className="text-sm font-medium text-orange-800">たべもの</span>
-              <span className="text-xs text-orange-600">8枚</span>
+              <span className="text-xs text-orange-600">{flashCards.filter(card => card.category === 'food').length}枚</span>
             </button>
             
             <button
@@ -168,7 +168,7 @@ export default function FlashCardApp() {
             >
               <span className="text-3xl mb-2">🐶</span>
               <span className="text-sm font-medium text-green-800">どうぶつ</span>
-              <span className="text-xs text-green-600">8枚</span>
+              <span className="text-xs text-green-600">{flashCards.filter(card => card.category === 'animal').length}枚</span>
             </button>
             
             <button
@@ -177,7 +177,7 @@ export default function FlashCardApp() {
             >
               <span className="text-3xl mb-2">🚗</span>
               <span className="text-sm font-medium text-blue-800">のりもの</span>
-              <span className="text-xs text-blue-600">8枚</span>
+              <span className="text-xs text-blue-600">{flashCards.filter(card => card.category === 'vehicle').length}枚</span>
             </button>
             
             <button
@@ -186,7 +186,7 @@ export default function FlashCardApp() {
             >
               <span className="text-3xl mb-2">🎯</span>
               <span className="text-sm font-medium text-purple-800">すべて</span>
-              <span className="text-xs text-purple-600">24枚</span>
+              <span className="text-xs text-purple-600">{flashCards.length}枚</span>
             </button>
           </div>
         </div>
