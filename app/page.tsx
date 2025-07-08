@@ -13,6 +13,14 @@ const flashCards = [
   { id: 6, category: 'food', emoji: '🍚', name: 'ごはん' },
   { id: 7, category: 'food', emoji: '🍜', name: 'らーめん' },
   { id: 8, category: 'food', emoji: '🍙', name: 'おにぎり' },
+  { id: 25, category: 'food', emoji: '🍕', name: 'ピザ' },
+  { id: 26, category: 'food', emoji: '🍔', name: 'ハンバーガー' },
+  { id: 27, category: 'food', emoji: '🍦', name: 'アイスクリーム' },
+  { id: 28, category: 'food', emoji: '🍰', name: 'ケーキ' },
+  { id: 29, category: 'food', emoji: '🍪', name: 'クッキー' },
+  { id: 30, category: 'food', emoji: '🍩', name: 'ドーナツ' },
+  { id: 31, category: 'food', emoji: '🍫', name: 'チョコレート' },
+  { id: 32, category: 'food', emoji: '🍬', name: 'キャンディ' },
   
   // 動物
   { id: 9, category: 'animal', emoji: '🐶', name: 'いぬ' },
@@ -23,6 +31,14 @@ const flashCards = [
   { id: 14, category: 'animal', emoji: '🐯', name: 'とら' },
   { id: 15, category: 'animal', emoji: '🐻', name: 'くま' },
   { id: 16, category: 'animal', emoji: '🦒', name: 'きりん' },
+  { id: 33, category: 'animal', emoji: '🐼', name: 'パンダ' },
+  { id: 34, category: 'animal', emoji: '🐨', name: 'コアラ' },
+  { id: 35, category: 'animal', emoji: '🦊', name: 'きつね' },
+  { id: 36, category: 'animal', emoji: '🐺', name: 'おおかみ' },
+  { id: 37, category: 'animal', emoji: '🐷', name: 'ぶた' },
+  { id: 38, category: 'animal', emoji: '🐮', name: 'うし' },
+  { id: 39, category: 'animal', emoji: '🐸', name: 'かえる' },
+  { id: 40, category: 'animal', emoji: '🐙', name: 'たこ' },
   
   // 車
   { id: 17, category: 'vehicle', emoji: '🚗', name: 'くるま' },
@@ -33,6 +49,14 @@ const flashCards = [
   { id: 22, category: 'vehicle', emoji: '🚌', name: 'バス' },
   { id: 23, category: 'vehicle', emoji: '🏍️', name: 'ばいく' },
   { id: 24, category: 'vehicle', emoji: '🚁', name: 'ヘリコプター' },
+  { id: 41, category: 'vehicle', emoji: '🚅', name: 'しんかんせん' },
+  { id: 42, category: 'vehicle', emoji: '🚇', name: 'ちかてつ' },
+  { id: 43, category: 'vehicle', emoji: '🚑', name: 'きゅうきゅうしゃ' },
+  { id: 44, category: 'vehicle', emoji: '🚒', name: 'しょうぼうしゃ' },
+  { id: 45, category: 'vehicle', emoji: '🚓', name: 'パトカー' },
+  { id: 46, category: 'vehicle', emoji: '🚛', name: 'トラック' },
+  { id: 47, category: 'vehicle', emoji: '🚜', name: 'トラクター' },
+  { id: 48, category: 'vehicle', emoji: '🚤', name: 'スピードボート' },
 ]
 
 export default function FlashCardApp() {
