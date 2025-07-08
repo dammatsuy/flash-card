@@ -1,6 +1,4 @@
-# Flash Card
-
-フラッシュカード学習アプリです。  
+# Flash Card  
 
 ## 機能
 
