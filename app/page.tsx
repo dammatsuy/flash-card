@@ -148,20 +148,7 @@ export default function FlashCardApp() {
     }
   }
 
-  const getCategoryEmoji = (category: string) => {
-    switch (category) {
-      case 'どうぶつ': return '🐶'
-      case 'たべもの': return '🍎'
-      case 'のりもの': return '🚗'
-      case 'ひらがな': return 'あ'
-      case 'あるふぁべっと': return 'A'
-      case 'かず': return '1'
-      case 'もの': return '📱'
-      case 'しぜん': return '🌲'
-      case 'しょくぶつ': return '🌸'
-      default: return '🎯'
-    }
-  }
+
 
   const getCategoryCount = (category: string) => {
     if (category === 'all') {
@@ -175,7 +162,7 @@ export default function FlashCardApp() {
       <div className="flex items-center justify-center p-3 pt-20">
         <div className="text-center bg-white rounded-2xl shadow-xl p-8 max-w-sm w-full mx-auto">
           <h1 className="text-2xl font-bold text-gray-800 mb-4">
-            🎯 フラッシュカード 🎯
+            フラッシュカード
           </h1>
           <p className="text-base text-gray-600 mb-6">
             どのカテゴリーで遊びますか？
@@ -188,22 +175,20 @@ export default function FlashCardApp() {
                 <button
                   key={categoryName}
                   onClick={() => handleCategorySelect(categoryName)}
-                  className={`flex flex-col items-center p-5 rounded-xl border-2 transition-all transform hover:scale-105 ${getCategoryColor(categoryName)}`}
+                  className={`flex flex-col items-center p-4 rounded-xl border-2 transition-all transform hover:scale-105 ${getCategoryColor(categoryName)}`}
                 >
-                  <span className="text-3xl mb-2">{getCategoryEmoji(categoryName)}</span>
-                  <span className="text-sm font-medium">{categoryName}</span>
-                  <span className="text-xs opacity-70">{getCategoryCount(categoryName)}枚</span>
+                  <span className="text-lg font-medium">{categoryName}</span>
+                  <span className="text-xs opacity-70 mt-1">{getCategoryCount(categoryName)}枚</span>
                 </button>
               )
             })}
             
             <button
               onClick={() => handleCategorySelect('all')}
-              className="flex flex-col items-center bg-purple-50 hover:bg-purple-100 p-5 rounded-xl border-2 border-purple-200 transition-all transform hover:scale-105"
+              className="flex flex-col items-center bg-purple-50 hover:bg-purple-100 p-4 rounded-xl border-2 border-purple-200 transition-all transform hover:scale-105"
             >
-              <span className="text-3xl mb-2">🎯</span>
-              <span className="text-sm font-medium text-purple-800">すべて</span>
-              <span className="text-xs text-purple-600">{allCards.length}枚</span>
+              <span className="text-lg font-medium text-purple-800">すべて</span>
+              <span className="text-xs text-purple-600 mt-1">{allCards.length}枚</span>
             </button>
           </div>
         </div>
@@ -259,11 +244,11 @@ export default function FlashCardApp() {
                   </div>
                 ) : (
                   <div className="w-48 h-48 mx-auto bg-gray-100 rounded-lg flex items-center justify-center text-4xl text-gray-400">
-                    {getCategoryEmoji(currentCard.category)}
+                    ?
                   </div>
                 )}
                 <div className="hidden w-48 h-48 mx-auto bg-gray-100 rounded-lg flex items-center justify-center text-4xl text-gray-400">
-                  {getCategoryEmoji(currentCard.category)}
+                  ?
                 </div>
               </div>
 
