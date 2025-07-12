@@ -75,7 +75,7 @@ export default function FlashCardApp() {
     setFilteredCards(cards)
     setCurrentCardIndex(0)
     setShowAnswer(false)
-  }, [selectedCategory, allCards])
+  }, [selectedCategory, allCards, setFilteredCards, setCurrentCardIndex, setShowAnswer])
 
   const currentCard = filteredCards[currentCardIndex]
 
@@ -145,7 +145,7 @@ export default function FlashCardApp() {
           </p>
           
           <div className="grid grid-cols-2 gap-4 mb-6">
-            {data.map((categoryData: any) => {
+            {data.map((categoryData: CategoryData) => {
               const categoryName = Object.keys(categoryData)[0]
               return (
                 <button
