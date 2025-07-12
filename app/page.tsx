@@ -153,7 +153,7 @@ export default function FlashCardApp() {
                   onClick={() => handleCategorySelect(categoryName)}
                   className={`flex flex-col items-center p-4 rounded-xl border-2 transition-all transform hover:scale-105 ${getCategoryColor(categoryName)}`}
                 >
-                  <span className="text-lg font-medium">{categoryName}</span>
+                  <span className="text-base font-medium">{categoryName}</span>
                   <span className="text-xs opacity-70 mt-1">{getCategoryCount(categoryName)}枚</span>
                 </button>
               )
