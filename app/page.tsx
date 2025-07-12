@@ -75,7 +75,7 @@ export default function FlashCardApp() {
     setFilteredCards(cards)
     setCurrentCardIndex(0)
     setShowAnswer(false)
-  }, [selectedCategory])
+  }, [selectedCategory, allCards])
 
   const currentCard = filteredCards[currentCardIndex]
 
