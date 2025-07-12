@@ -31,8 +31,8 @@ export default function FlashCardApp() {
       if (Array.isArray(items)) {
         items.forEach((item, index) => {
           if (typeof item === 'string') {
-            if (categoryName === 'ひらがな') {
-              // ひらがなは文字をそのまま表示
+            if (categoryName === 'ひらがな' || categoryName === 'あるふぁべっと' || categoryName === 'かず') {
+              // ひらがな、アルファベット、数字は文字をそのまま表示
               cards.push({
                 id: `${categoryName}-${index}`,
                 category: categoryName,
@@ -40,34 +40,12 @@ export default function FlashCardApp() {
                 displayValue: item
               })
             } else {
-              // その他の文字列アイテム（もの、しぜん、しょくぶつ）
+              // その他の文字列アイテム（もの、しぜん、しょくぶつ、どうぶつ、たべもの、のりもの）
               cards.push({
                 id: `${categoryName}-${index}`,
                 category: categoryName,
                 name: item,
                 imagePath: `/flash-cards/images/${categoryName}/${item}.png`
-              })
-            }
-          } else if (typeof item === 'object') {
-            // オブジェクトアイテム（あるふぁべっと、かず）
-            const key = Object.keys(item)[0]
-            const value = item[key]
-            if (categoryName === 'あるふぁべっと' || categoryName === 'かず') {
-              // アルファベットと数字はvalueを表示
-              cards.push({
-                id: `${categoryName}-${index}`,
-                category: categoryName,
-                name: key,
-                answer: value,
-                displayValue: value
-              })
-            } else {
-              cards.push({
-                id: `${categoryName}-${index}`,
-                category: categoryName,
-                name: key,
-                answer: value,
-                imagePath: `/flash-cards/images/${categoryName}/${key}.png`
               })
             }
           }
