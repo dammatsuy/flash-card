@@ -1,7 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import data from './data.json'
+import rawData from './data.json'
+
+type Category = "どうぶつ" | "たべもの" | "のりもの" | "ひらがな" | "あるふぁべっと" | "かず" | "もの" | "しぜん" | "しょくぶつ";
+type CategoryData = Partial<Record<Category, string[]>>;
+const data = rawData as CategoryData[];
 
 // フラッシュカードの型定義
 type FlashCard = {
@@ -22,11 +26,11 @@ export default function FlashCardApp() {
 
   // データからフラッシュカードを生成
   const generateFlashCards = (): FlashCard[] => {
-    const cards: FlashCard[] = []
+    const cards: FlashCard[] = [];
     
-    data.forEach((categoryData: any) => {
+    data.forEach((categoryData: CategoryData) => {
       const categoryName = Object.keys(categoryData)[0]
-      const items = categoryData[categoryName]
+      const items = categoryData[categoryName as Category]
       
       if (Array.isArray(items)) {
         items.forEach((item, index) => {
