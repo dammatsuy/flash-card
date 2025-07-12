@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import rawData from './data.json'
 
 type Category = "どうぶつ" | "たべもの" | "のりもの" | "ひらがな" | "あるふぁべっと" | "かず" | "もの" | "しぜん" | "しょくぶつ";
@@ -203,9 +204,11 @@ export default function FlashCardApp() {
               {/* 画像または文字表示 */}
               <div className="mb-6">
                 {currentCard.imagePath ? (
-                  <img
+                  <Image
                     src={currentCard.imagePath}
                     alt={currentCard.name}
+                    width={192}
+                    height={192}
                     className="w-48 h-48 mx-auto object-contain rounded-lg shadow-md"
                     onError={(e) => {
                       // 画像が見つからない場合のフォールバック
