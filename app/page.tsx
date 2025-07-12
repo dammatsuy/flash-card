@@ -62,7 +62,7 @@ export default function FlashCardApp() {
 
   const allCards = generateFlashCards()
 
-  // カテゴリに基づいてカードをフィルタリングしてシャッフル
+  // カテゴリに基づいてカードをフィルタリング
   const getFilteredCards = (): FlashCard[] => {
     let cards = [...allCards]
     
@@ -70,8 +70,7 @@ export default function FlashCardApp() {
       cards = allCards.filter(card => card.category === selectedCategory)
     }
     
-    // シャッフル
-    return cards.sort(() => Math.random() - 0.5)
+    return cards
   }
 
   const filteredCards = getFilteredCards()
@@ -122,8 +121,6 @@ export default function FlashCardApp() {
       default: return 'bg-gray-50 border-gray-200 text-gray-800'
     }
   }
-
-
 
   const getCategoryCount = (category: string) => {
     if (category === 'all') {
