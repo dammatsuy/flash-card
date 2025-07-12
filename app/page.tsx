@@ -1,125 +1,97 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import data from './data.json'
 
-// フラッシュカードのデータ
-const flashCards = [
-  // 食べ物
-  { id: 1, category: 'food', emoji: '🍎', name: 'りんご' },
-  { id: 2, category: 'food', emoji: '🍌', name: 'ばなな' },
-  { id: 3, category: 'food', emoji: '🍊', name: 'みかん' },
-  { id: 4, category: 'food', emoji: '🍓', name: 'いちご' },
-  { id: 5, category: 'food', emoji: '🍞', name: 'パン' },
-  { id: 6, category: 'food', emoji: '🍚', name: 'ごはん' },
-  { id: 7, category: 'food', emoji: '🍜', name: 'らーめん' },
-  { id: 8, category: 'food', emoji: '🍙', name: 'おにぎり' },
-  { id: 25, category: 'food', emoji: '🍕', name: 'ピザ' },
-  { id: 26, category: 'food', emoji: '🍔', name: 'ハンバーガー' },
-  { id: 27, category: 'food', emoji: '🍦', name: 'アイスクリーム' },
-  { id: 28, category: 'food', emoji: '🍰', name: 'ケーキ' },
-  { id: 29, category: 'food', emoji: '🍪', name: 'クッキー' },
-  { id: 30, category: 'food', emoji: '🍩', name: 'ドーナツ' },
-  { id: 31, category: 'food', emoji: '🍫', name: 'チョコレート' },
-  { id: 32, category: 'food', emoji: '🍬', name: 'キャンディ' },
-  { id: 49, category: 'food', emoji: '🥚', name: 'たまご' },
-  { id: 50, category: 'food', emoji: '🥕', name: 'にんじん' },
-  { id: 51, category: 'food', emoji: '🍇', name: 'ぶどう' },
-  { id: 52, category: 'food', emoji: '🍉', name: 'すいか' },
-  { id: 53, category: 'food', emoji: '🍋', name: 'レモン' },
-  { id: 54, category: 'food', emoji: '🍆', name: 'なす' },
-  { id: 55, category: 'food', emoji: '🥦', name: 'ブロッコリー' },
-  { id: 56, category: 'food', emoji: '🥒', name: 'きゅうり' },
-  { id: 57, category: 'food', emoji: '🍛', name: 'カレー' },
-  { id: 58, category: 'food', emoji: '🍤', name: 'えびフライ' },
-  { id: 59, category: 'food', emoji: '🍮', name: 'プリン' },
-  { id: 60, category: 'food', emoji: '🥨', name: 'プレッツェル' },
-  { id: 61, category: 'food', emoji: '🥯', name: 'ベーグル' },
-  { id: 62, category: 'food', emoji: '🥗', name: 'サラダ' },
-  { id: 63, category: 'food', emoji: '🥩', name: 'ステーキ' },
-  { id: 64, category: 'food', emoji: '🍟', name: 'フライドポテト' },
-  
-  // 動物
-  { id: 9, category: 'animal', emoji: '🐶', name: 'いぬ' },
-  { id: 10, category: 'animal', emoji: '🐱', name: 'ねこ' },
-  { id: 11, category: 'animal', emoji: '🐰', name: 'うさぎ' },
-  { id: 12, category: 'animal', emoji: '🐘', name: 'ぞう' },
-  { id: 13, category: 'animal', emoji: '🦁', name: 'らいおん' },
-  { id: 14, category: 'animal', emoji: '🐯', name: 'とら' },
-  { id: 15, category: 'animal', emoji: '🐻', name: 'くま' },
-  { id: 16, category: 'animal', emoji: '🦒', name: 'きりん' },
-  { id: 33, category: 'animal', emoji: '🐼', name: 'パンダ' },
-  { id: 34, category: 'animal', emoji: '🐨', name: 'コアラ' },
-  { id: 35, category: 'animal', emoji: '🦊', name: 'きつね' },
-  { id: 36, category: 'animal', emoji: '🐺', name: 'おおかみ' },
-  { id: 37, category: 'animal', emoji: '🐷', name: 'ぶた' },
-  { id: 38, category: 'animal', emoji: '🐮', name: 'うし' },
-  { id: 39, category: 'animal', emoji: '🐸', name: 'かえる' },
-  { id: 40, category: 'animal', emoji: '🐙', name: 'たこ' },
-  { id: 65, category: 'animal', emoji: '🦉', name: 'ふくろう' },
-  { id: 66, category: 'animal', emoji: '🦄', name: 'ゆにこーん' },
-  { id: 67, category: 'animal', emoji: '🦓', name: 'しまうま' },
-  { id: 68, category: 'animal', emoji: '🦔', name: 'はりねずみ' },
-  { id: 69, category: 'animal', emoji: '🦋', name: 'ちょうちょ' },
-  { id: 70, category: 'animal', emoji: '🐵', name: 'さる' },
-  { id: 71, category: 'animal', emoji: '🦆', name: 'あひる' },
-  { id: 72, category: 'animal', emoji: '🦀', name: 'かに' },
-  { id: 73, category: 'animal', emoji: '🐧', name: 'ぺんぎん' },
-  { id: 74, category: 'animal', emoji: '🐢', name: 'かめ' },
-  { id: 75, category: 'animal', emoji: '🦍', name: 'ごりら' },
-  { id: 76, category: 'animal', emoji: '🦭', name: 'あざらし' },
-  { id: 77, category: 'animal', emoji: '🦦', name: 'かわうそ' },
-  { id: 78, category: 'animal', emoji: '🦑', name: 'いか' },
-  { id: 79, category: 'animal', emoji: '🦞', name: 'ロブスター' },
-  { id: 80, category: 'animal', emoji: '🦅', name: 'わし' },
-  
-  // 車
-  { id: 17, category: 'vehicle', emoji: '🚗', name: 'くるま' },
-  { id: 18, category: 'vehicle', emoji: '🚄', name: 'でんしゃ' },
-  { id: 19, category: 'vehicle', emoji: '✈️', name: 'ひこうき' },
-  { id: 20, category: 'vehicle', emoji: '🚢', name: 'ふね' },
-  { id: 21, category: 'vehicle', emoji: '🚲', name: 'じてんしゃ' },
-  { id: 22, category: 'vehicle', emoji: '🚌', name: 'バス' },
-  { id: 23, category: 'vehicle', emoji: '🏍️', name: 'ばいく' },
-  { id: 24, category: 'vehicle', emoji: '🚁', name: 'ヘリコプター' },
-  { id: 41, category: 'vehicle', emoji: '🚅', name: 'しんかんせん' },
-  { id: 42, category: 'vehicle', emoji: '🚇', name: 'ちかてつ' },
-  { id: 43, category: 'vehicle', emoji: '🚑', name: 'きゅうきゅうしゃ' },
-  { id: 44, category: 'vehicle', emoji: '🚒', name: 'しょうぼうしゃ' },
-  { id: 45, category: 'vehicle', emoji: '🚓', name: 'パトカー' },
-  { id: 46, category: 'vehicle', emoji: '🚛', name: 'トラック' },
-  { id: 47, category: 'vehicle', emoji: '🚜', name: 'トラクター' },
-  { id: 48, category: 'vehicle', emoji: '🚤', name: 'スピードボート' },
-  { id: 81, category: 'vehicle', emoji: '🛵', name: 'スクーター' },
-  { id: 82, category: 'vehicle', emoji: '🚚', name: 'はいたつしゃ' },
-  { id: 83, category: 'vehicle', emoji: '🚟', name: 'モノレール' },
-  { id: 84, category: 'vehicle', emoji: '🚠', name: 'ロープウェイ' },
-  { id: 85, category: 'vehicle', emoji: '🚡', name: 'ケーブルカー' },
-  { id: 86, category: 'vehicle', emoji: '🛺', name: 'リキシャ' },
-  { id: 87, category: 'vehicle', emoji: '🛳️', name: 'クルーズせん' },
-  { id: 88, category: 'vehicle', emoji: '🛩️', name: 'こがたひこうき' },
-  { id: 89, category: 'vehicle', emoji: '🚀', name: 'ロケット' },
-  { id: 90, category: 'vehicle', emoji: '🦽', name: 'くるまいす' },
-  { id: 91, category: 'vehicle', emoji: '🦼', name: 'でんどうスクーター' },
-  { id: 92, category: 'vehicle', emoji: '🚂', name: 'きしゃ' },
-  { id: 93, category: 'vehicle', emoji: '🚈', name: 'でんしゃ（ちいき）' },
-  { id: 94, category: 'vehicle', emoji: '🚲', name: 'マウンテンバイク' },
-  { id: 95, category: 'vehicle', emoji: '🛶', name: 'カヌー' },
-  { id: 96, category: 'vehicle', emoji: '🛥️', name: 'モーターボート' },
-]
+// データの型定義
+type DataItem = string | { [key: string]: string }
+type CategoryData = {
+  [key: string]: DataItem[]
+}
+
+// フラッシュカードの型定義
+type FlashCard = {
+  id: string
+  category: string
+  name: string
+  imagePath?: string
+  answer?: string
+  displayValue?: string
+}
 
 export default function FlashCardApp() {
   const [currentCardIndex, setCurrentCardIndex] = useState(0)
   const [showAnswer, setShowAnswer] = useState(false)
   const [gameStarted, setGameStarted] = useState(false)
-  const [selectedCategory, setSelectedCategory] = useState<string>('all')
-  const [filteredCards, setFilteredCards] = useState(flashCards)
+  const [selectedCategory, setSelectedCategory] = useState<string>('')
+  const [filteredCards, setFilteredCards] = useState<FlashCard[]>([])
+
+  // データからフラッシュカードを生成
+  const generateFlashCards = (): FlashCard[] => {
+    const cards: FlashCard[] = []
+    
+    data.forEach((categoryData: any) => {
+      const categoryName = Object.keys(categoryData)[0]
+      const items = categoryData[categoryName]
+      
+      if (Array.isArray(items)) {
+        items.forEach((item, index) => {
+          if (typeof item === 'string') {
+            if (categoryName === 'ひらがな') {
+              // ひらがなは文字をそのまま表示
+              cards.push({
+                id: `${categoryName}-${index}`,
+                category: categoryName,
+                name: item,
+                displayValue: item
+              })
+            } else {
+              // その他の文字列アイテム（もの、しぜん、しょくぶつ）
+              cards.push({
+                id: `${categoryName}-${index}`,
+                category: categoryName,
+                name: item,
+                imagePath: `/flash-cards/images/${categoryName}/${item}.png`
+              })
+            }
+          } else if (typeof item === 'object') {
+            // オブジェクトアイテム（あるふぁべっと、かず）
+            const key = Object.keys(item)[0]
+            const value = item[key]
+            if (categoryName === 'あるふぁべっと' || categoryName === 'かず') {
+              // アルファベットと数字はvalueを表示
+              cards.push({
+                id: `${categoryName}-${index}`,
+                category: categoryName,
+                name: key,
+                answer: value,
+                displayValue: value
+              })
+            } else {
+              cards.push({
+                id: `${categoryName}-${index}`,
+                category: categoryName,
+                name: key,
+                answer: value,
+                imagePath: `/flash-cards/images/${categoryName}/${key}.png`
+              })
+            }
+          }
+        })
+      }
+    })
+    
+    return cards
+  }
+
+  const allCards = generateFlashCards()
 
   // カテゴリに基づいてカードをフィルタリング
   useEffect(() => {
-    let cards = [...flashCards]
+    let cards = [...allCards]
     
-    if (selectedCategory !== 'all') {
-      cards = flashCards.filter(card => card.category === selectedCategory)
+    if (selectedCategory && selectedCategory !== 'all') {
+      cards = allCards.filter(card => card.category === selectedCategory)
     }
     
     // シャッフル
@@ -151,6 +123,7 @@ export default function FlashCardApp() {
 
   const handleBackToHome = () => {
     setGameStarted(false)
+    setSelectedCategory('')
     setCurrentCardIndex(0)
     setShowAnswer(false)
   }
@@ -162,31 +135,39 @@ export default function FlashCardApp() {
 
   const getCategoryColor = (category: string) => {
     switch (category) {
-      case 'food': return 'bg-orange-50 border-orange-200 text-orange-800'
-      case 'animal': return 'bg-green-50 border-green-200 text-green-800'
-      case 'vehicle': return 'bg-blue-50 border-blue-200 text-blue-800'
+      case 'どうぶつ': return 'bg-green-50 border-green-200 text-green-800'
+      case 'たべもの': return 'bg-orange-50 border-orange-200 text-orange-800'
+      case 'のりもの': return 'bg-blue-50 border-blue-200 text-blue-800'
+      case 'ひらがな': return 'bg-purple-50 border-purple-200 text-purple-800'
+      case 'あるふぁべっと': return 'bg-indigo-50 border-indigo-200 text-indigo-800'
+      case 'かず': return 'bg-red-50 border-red-200 text-red-800'
+      case 'もの': return 'bg-yellow-50 border-yellow-200 text-yellow-800'
+      case 'しぜん': return 'bg-teal-50 border-teal-200 text-teal-800'
+      case 'しょくぶつ': return 'bg-emerald-50 border-emerald-200 text-emerald-800'
       default: return 'bg-gray-50 border-gray-200 text-gray-800'
-    }
-  }
-
-  const getCategoryName = (category: string) => {
-    switch (category) {
-      case 'food': return 'たべもの'
-      case 'animal': return 'どうぶつ'
-      case 'vehicle': return 'のりもの'
-      case 'all': return 'すべて'
-      default: return ''
     }
   }
 
   const getCategoryEmoji = (category: string) => {
     switch (category) {
-      case 'food': return '🍎'
-      case 'animal': return '🐶'
-      case 'vehicle': return '🚗'
-      case 'all': return '🎯'
-      default: return ''
+      case 'どうぶつ': return '🐶'
+      case 'たべもの': return '🍎'
+      case 'のりもの': return '🚗'
+      case 'ひらがな': return 'あ'
+      case 'あるふぁべっと': return 'A'
+      case 'かず': return '1'
+      case 'もの': return '📱'
+      case 'しぜん': return '🌲'
+      case 'しょくぶつ': return '🌸'
+      default: return '🎯'
     }
+  }
+
+  const getCategoryCount = (category: string) => {
+    if (category === 'all') {
+      return allCards.length
+    }
+    return allCards.filter(card => card.category === category).length
   }
 
   if (!gameStarted) {
@@ -201,32 +182,20 @@ export default function FlashCardApp() {
           </p>
           
           <div className="grid grid-cols-2 gap-4 mb-6">
-            <button
-              onClick={() => handleCategorySelect('food')}
-              className="flex flex-col items-center bg-orange-50 hover:bg-orange-100 p-5 rounded-xl border-2 border-orange-200 transition-all transform hover:scale-105"
-            >
-              <span className="text-3xl mb-2">🍎</span>
-              <span className="text-sm font-medium text-orange-800">たべもの</span>
-              <span className="text-xs text-orange-600">{flashCards.filter(card => card.category === 'food').length}枚</span>
-            </button>
-            
-            <button
-              onClick={() => handleCategorySelect('animal')}
-              className="flex flex-col items-center bg-green-50 hover:bg-green-100 p-5 rounded-xl border-2 border-green-200 transition-all transform hover:scale-105"
-            >
-              <span className="text-3xl mb-2">🐶</span>
-              <span className="text-sm font-medium text-green-800">どうぶつ</span>
-              <span className="text-xs text-green-600">{flashCards.filter(card => card.category === 'animal').length}枚</span>
-            </button>
-            
-            <button
-              onClick={() => handleCategorySelect('vehicle')}
-              className="flex flex-col items-center bg-blue-50 hover:bg-blue-100 p-5 rounded-xl border-2 border-blue-200 transition-all transform hover:scale-105"
-            >
-              <span className="text-3xl mb-2">🚗</span>
-              <span className="text-sm font-medium text-blue-800">のりもの</span>
-              <span className="text-xs text-blue-600">{flashCards.filter(card => card.category === 'vehicle').length}枚</span>
-            </button>
+            {data.map((categoryData: any) => {
+              const categoryName = Object.keys(categoryData)[0]
+              return (
+                <button
+                  key={categoryName}
+                  onClick={() => handleCategorySelect(categoryName)}
+                  className={`flex flex-col items-center p-5 rounded-xl border-2 transition-all transform hover:scale-105 ${getCategoryColor(categoryName)}`}
+                >
+                  <span className="text-3xl mb-2">{getCategoryEmoji(categoryName)}</span>
+                  <span className="text-sm font-medium">{categoryName}</span>
+                  <span className="text-xs opacity-70">{getCategoryCount(categoryName)}枚</span>
+                </button>
+              )
+            })}
             
             <button
               onClick={() => handleCategorySelect('all')}
@@ -234,7 +203,7 @@ export default function FlashCardApp() {
             >
               <span className="text-3xl mb-2">🎯</span>
               <span className="text-sm font-medium text-purple-800">すべて</span>
-              <span className="text-xs text-purple-600">{flashCards.length}枚</span>
+              <span className="text-xs text-purple-600">{allCards.length}枚</span>
             </button>
           </div>
         </div>
@@ -250,84 +219,90 @@ export default function FlashCardApp() {
           <div className="flex justify-between items-center mb-3 bg-white rounded-xl p-3 shadow-lg">
             <button
               onClick={handleBackToHome}
-              className="text-gray-600 hover:text-gray-800 px-2 py-1 rounded-lg hover:bg-gray-100 transition-all text-sm"
+              className="text-gray-600 hover:text-gray-800 transition-colors"
             >
-              ← ホーム
+              ← 戻る
             </button>
-            <div className="text-sm font-semibold text-gray-700">
-              {currentCardIndex + 1} / {filteredCards.length}
+            <div className="text-center">
+              <h2 className="text-lg font-bold text-gray-800">
+                {selectedCategory === 'all' ? 'すべて' : selectedCategory}
+              </h2>
+              <p className="text-sm text-gray-600">
+                {currentCardIndex + 1} / {filteredCards.length}
+              </p>
             </div>
-            <div className="w-12"></div> {/* スペーサー */}
-          </div>
-          <div className={`inline-block px-4 py-2 rounded-full text-xs font-semibold border-2 ${getCategoryColor(currentCard.category)}`}>
-            {getCategoryEmoji(selectedCategory)} {getCategoryName(selectedCategory)}
+            <div className="w-8"></div>
           </div>
         </div>
 
-        {/* カード */}
-        <div className="bg-white rounded-2xl shadow-2xl p-6 mb-4 border border-gray-100">
-          <div className="text-center">
-            <div className="text-6xl mb-4 p-4 bg-gray-50 rounded-2xl inline-block">{currentCard.emoji}</div>
-            <p className="text-xl font-bold text-gray-800 mb-4">これはなあに？</p>
-            
-            {/* 答え表示エリア - 固定の高さを確保 */}
-            <div className="min-h-[80px] flex items-center justify-center mb-4">
+        {/* フラッシュカード */}
+        {currentCard && (
+          <div className="bg-white rounded-2xl shadow-xl p-6 mb-6">
+            <div className="text-center">
+              {/* 画像または文字表示 */}
+              <div className="mb-6">
+                {currentCard.imagePath ? (
+                  <img
+                    src={currentCard.imagePath}
+                    alt={currentCard.name}
+                    className="w-48 h-48 mx-auto object-contain rounded-lg shadow-md"
+                    onError={(e) => {
+                      // 画像が見つからない場合のフォールバック
+                      const target = e.target as HTMLImageElement
+                      target.style.display = 'none'
+                      target.nextElementSibling?.classList.remove('hidden')
+                    }}
+                  />
+                ) : currentCard.displayValue ? (
+                  <div className="w-48 h-48 mx-auto bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg shadow-md flex items-center justify-center">
+                    <span className="text-8xl font-bold text-gray-800">{currentCard.displayValue}</span>
+                  </div>
+                ) : (
+                  <div className="w-48 h-48 mx-auto bg-gray-100 rounded-lg flex items-center justify-center text-4xl text-gray-400">
+                    {getCategoryEmoji(currentCard.category)}
+                  </div>
+                )}
+                <div className="hidden w-48 h-48 mx-auto bg-gray-100 rounded-lg flex items-center justify-center text-4xl text-gray-400">
+                  {getCategoryEmoji(currentCard.category)}
+                </div>
+              </div>
+
+              {/* 答え */}
               {showAnswer ? (
-                <div className="text-2xl font-bold text-purple-700 bg-purple-50 p-4 rounded-xl">
-                  {currentCard.name}
+                <div className="space-y-2">
+                  <h3 className="text-2xl font-bold text-gray-800">{currentCard.name}</h3>
+                  {currentCard.answer && (
+                    <p className="text-xl text-blue-600 font-semibold">{currentCard.answer}</p>
+                  )}
                 </div>
               ) : (
                 <button
                   onClick={handleShowAnswer}
-                  className="bg-gradient-to-r from-green-500 to-blue-500 text-white px-6 py-3 rounded-full text-base font-bold hover:from-green-600 hover:to-blue-600 transition-all shadow-lg transform hover:scale-105"
+                  className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-xl transition-colors w-full"
                 >
-                  こたえをみる
+                  答えを見る
                 </button>
               )}
             </div>
           </div>
-        </div>
+        )}
 
-        {/* ナビゲーション */}
-        <div className="flex justify-between items-center bg-white rounded-2xl p-4 shadow-xl">
+        {/* ナビゲーションボタン */}
+        <div className="flex justify-between items-center">
           <button
             onClick={handlePreviousCard}
             disabled={currentCardIndex === 0}
-            className={`flex items-center px-4 py-2 rounded-full text-sm font-bold transition-all transform hover:scale-105 ${
-              currentCardIndex === 0
-                ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                : 'bg-gradient-to-r from-gray-500 to-gray-600 text-white hover:from-gray-600 hover:to-gray-700 shadow-lg'
-            }`}
+            className="bg-gray-500 hover:bg-gray-600 disabled:bg-gray-300 text-white font-bold py-3 px-6 rounded-xl transition-colors disabled:cursor-not-allowed"
           >
-            ← まえ
+            前へ
           </button>
-          
-          <div className="text-center px-3">
-            <div className="flex space-x-1">
-              {Array.from({ length: Math.min(filteredCards.length, 8) }, (_, i) => (
-                <div
-                  key={i}
-                  className={`w-1.5 h-1.5 rounded-full ${
-                    i === currentCardIndex % 8 ? 'bg-purple-500' : 'bg-gray-300'
-                  }`}
-                />
-              ))}
-              {filteredCards.length > 8 && (
-                <span className="text-gray-500 text-xs ml-1">...</span>
-              )}
-            </div>
-          </div>
           
           <button
             onClick={handleNextCard}
             disabled={currentCardIndex === filteredCards.length - 1}
-            className={`flex items-center px-4 py-2 rounded-full text-sm font-bold transition-all transform hover:scale-105 ${
-              currentCardIndex === filteredCards.length - 1
-                ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                : 'bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600 shadow-lg'
-            }`}
+            className="bg-gray-500 hover:bg-gray-600 disabled:bg-gray-300 text-white font-bold py-3 px-6 rounded-xl transition-colors disabled:cursor-not-allowed"
           >
-            つぎ →
+            次へ
           </button>
         </div>
       </div>
