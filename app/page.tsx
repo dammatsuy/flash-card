@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import rawData from './data.json'
 
@@ -23,7 +23,6 @@ export default function FlashCardApp() {
   const [showAnswer, setShowAnswer] = useState(false)
   const [gameStarted, setGameStarted] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState<string>('')
-  const [filteredCards, setFilteredCards] = useState<FlashCard[]>([])
 
   // データからフラッシュカードを生成
   const generateFlashCards = (): FlashCard[] => {
@@ -63,8 +62,8 @@ export default function FlashCardApp() {
 
   const allCards = generateFlashCards()
 
-  // カテゴリに基づいてカードをフィルタリング
-  useEffect(() => {
+  // カテゴリに基づいてカードをフィルタリングしてシャッフル
+  const getFilteredCards = (): FlashCard[] => {
     let cards = [...allCards]
     
     if (selectedCategory && selectedCategory !== 'all') {
@@ -72,11 +71,10 @@ export default function FlashCardApp() {
     }
     
     // シャッフル
-    cards = cards.sort(() => Math.random() - 0.5)
-    setFilteredCards(cards)
-    setCurrentCardIndex(0)
-    setShowAnswer(false)
-  }, [selectedCategory, allCards])
+    return cards.sort(() => Math.random() - 0.5)
+  }
+
+  const filteredCards = getFilteredCards()
 
   const currentCard = filteredCards[currentCardIndex]
 
