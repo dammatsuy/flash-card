@@ -3,12 +3,6 @@
 import { useState, useEffect } from 'react'
 import data from './data.json'
 
-// データの型定義
-type DataItem = string | { [key: string]: string }
-type CategoryData = {
-  [key: string]: DataItem[]
-}
-
 // フラッシュカードの型定義
 type FlashCard = {
   id: string
